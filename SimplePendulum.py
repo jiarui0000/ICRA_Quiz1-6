@@ -1,19 +1,18 @@
-import numpy
 import math
 
-class SimplePendulum:
-    startPoint_x = 0.0 #(m)
-    statePoint_y = 0.0 #(m) fix point height - ball height
-    currentPoint_x = 0.0 #(m)
-    currentPoint_y = 0.0 #(m) fix point height - ball height
-    velocity = 0.0 #(m/s)
-    theta = 0.0 #(rad) angle between the rope and the vertical
-    acc = 0.0 #(m/s^2) rotate
-    ropeLength = 0.0 #(m)
-    accOfGravity = 9.8 #(m/s^2) downside
-    frequency = 0.0 #(Hz)
-    runtime = 0.0 #(s)
 
+class SimplePendulum:
+    startPoint_x = 0.0  # (m)
+    statePoint_y = 0.0  # (m) fix point height - ball height
+    currentPoint_x = 0.0  # (m)
+    currentPoint_y = 0.0  # (m) fix point height - ball height
+    velocity = 0.0  # (m/s)
+    theta = 0.0  # (rad) angle between the rope and the vertical
+    acc = 0.0  # (m/s^2) rotate
+    ropeLength = 0.0  # (m)
+    accOfGravity = 9.8  # (m/s^2) downside
+    frequency = 0.0  # (Hz)
+    runtime = 0.0  # (s)
 
     def __init__(self, startPoint_x, startPoint_y, frequency):
         self.startPoint_x = startPoint_x
@@ -21,15 +20,14 @@ class SimplePendulum:
         self.frequency = frequency
         self.currentPoint_x = startPoint_x
         self.currentPoint_y = startPoint_y
-        self.theta = math.atan(abs(currentPoint_x / currentPoint_y))
-        self.ropeLength = numpy.sqrt(numpy.square(startPoint_x) + numpy.square(startPoint_y))
+        self.theta = math.atan(abs(self.currentPoint_x / self.currentPoint_y))
+        self.ropeLength = math.sqrt(startPoint_x * startPoint_x + startPoint_y * startPoint_y)
         self.velocity = 0.0
         self.acc = 0.0
         return
 
-
     def accelerationCalculate(self):
-        self.acc = accOfGravity * math.sin(theta)
+        self.acc = self.accOfGravity * math.sin(self.theta)
         return
 
     def velocityCalculate(self):
@@ -41,19 +39,52 @@ class SimplePendulum:
         self.velocityCalculate()
         self.currentPoint_x -= self.velocity * math.cos(self.theta)
         self.currentPoint_y += self.velocity * math.sin(self.theta)
-        self.theta = math.atan(currentPoint_x / currentPoint_y)
+        self.theta = math.atan(self.currentPoint_x / self.currentPoint_y)
         return
 
     def getVelocityWithX(self, target_x):
         self.runtime = 0.0
-        while (abs(self.currentPoint_x - target_x) > 0.00001) :
-            self.runtime += 1/frequency
-            positionCalculate()
-        print('The line velocity is %.4f \n' % self.velocity)
-        print('The time cost is %.4f \n' % self.runtime)
+        while (abs(self.currentPoint_x - target_x) > 0.001):
+            self.runtime += 1 / self.frequency
+            self.positionCalculate()
+        print("Get Velocity With X")
+        print('The line velocity is %.4f ' % self.velocity)
+        print('The time cost is %.4f ' % self.runtime)
+        print("x = ", self.currentPoint_x)
+        print("y = ", self.currentPoint_y)
+        print("l = ", self.ropeLength)
+        return
+
+    def getVelocityWithY(self, target_y):
+        self.runtime = 0.0
+        while (abs(self.currentPoint_y - target_y) > 0.01):
+            self.runtime += 1 / self.frequency
+            self.positionCalculate()
+        print("Get Velocity With Y")
+        print("The line velocity is %.4f " % self.velocity)
+        print("The time cost is %.4f " % self.runtime)
+        print("x = ", self.currentPoint_x)
+        print("y = ", self.currentPoint_y)
+        print("l = ", self.ropeLength)
+        return
+
+    def getVelocityWithTime(self, target_time):
+        self.runtime = 0.0
+        while (abs(self.runtime - target_time) > 0.000001):
+            self.runtime += 1 / self.frequency
+            self.positionCalculate()
+        print("Get Velocity With Time")
+        print("The line velocity is %.4f " % self.velocity)
+        print("The time cost is %.4f " % self.runtime)
+        print("x = ", self.currentPoint_x)
+        print("y = ", self.currentPoint_y)
+        print("l = ", self.ropeLength)
         return
 
 
-b = SimplePendulum(0.3, 1, 30)
-b.getVelocityWithX(0.1)
-print "hello"
+b = SimplePendulum(40, 30, 2000000)
+b.getVelocityWithX(10)
+b = SimplePendulum(40, 30, 2000000)
+b.getVelocityWithY(48.988)
+b = SimplePendulum(40, 30, 2000000)
+b.getVelocityWithTime(3.2353)
