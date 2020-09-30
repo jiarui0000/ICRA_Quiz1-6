@@ -15,7 +15,7 @@ Print the current velocity, runtime, x and y coordinate
 4. getSituationWithX(target_x)
 Get the motion state for the specified x coordinate
 
-5.getSituationWithY(target_y)
+5. getSituationWithY(target_y)
 Get the motion state for the specified y coordinate
 
 6. getSituationWithTime(target_time)
