@@ -34,7 +34,7 @@ class SimplePendulum:
     def velocityCalculate(self):
         self.accelerationCalculate()
         self.velocity += self.acc / self.frequency
-        print(self.velocity)
+        #print(self.velocity)
         return
 
     def positionCalculate(self):
@@ -42,8 +42,14 @@ class SimplePendulum:
         self.currentPoint_x -= self.velocity * math.cos(self.theta) / self.frequency
         self.currentPoint_y += self.velocity * math.sin(self.theta) / self.frequency
         self.theta = math.atan(self.currentPoint_x / self.currentPoint_y)
-        self.getCurrentSituation()
+        # self.getCurrentSituation()
+        self.errorCorrection()
         return
+
+    def errorCorrection(self):
+        error_length = math.sqrt(self.currentPoint_x * self.currentPoint_x + self.currentPoint_y * self.currentPoint_y)
+        self.currentPoint_x = self.currentPoint_x * self.ropeLength / error_length
+        self.currentPoint_y = self.currentPoint_y * self.ropeLength / error_length
 
     def getCurrentSituation(self):
         print('The line velocity is %.4f ' % self.velocity)
@@ -86,4 +92,4 @@ b.getVelocityWithX(-10)
 b = SimplePendulum(40, 30, 200000)
 b.getVelocityWithY(48.988)
 b = SimplePendulum(40, 30, 200000)
-b.getVelocityWithTime(0.0023)
+b.getVelocityWithTime(4.261)
