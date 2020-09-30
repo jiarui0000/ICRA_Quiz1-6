@@ -6,19 +6,19 @@ Methods:
 
 1. __init__(startPoint_x, startPoint_y, frequency)
 
-Develop a simple pendulum. The horizontal distance between its initial position and the fixed point is x, and the vertical distance is y. The parameter "frequency" is the refresh frequency of the model corresponding to reality. The higher the frequency, the higher the accuracy and the longer the calculation time required. 
+Develop a simple pendulum. The horizontal distance between its initial position and the fixed point is x, and the vertical distance is y. The parameter "frequency" is the refresh frequency of the model corresponding to reality. The higher the frequency, the higher the accuracy and the longer the calculation time required.
 
 2. setFrenquncy(frequency)
 
-Change the refresh rate. 
+Change the refresh rate.
 
 3. reset()
 
-Reset the simple pendulum to the origional status. 
+Reset the simple pendulum to the origional status.
 
 4. moveThroughTime()
 
-Let the model refresh once. 
+Let the model refresh once.
 
 5. getCurrentX()
 
@@ -34,7 +34,7 @@ Return a tuple with (velocity, runtime, x coordinate, y coordinate) of current s
 
 8. printCurrentSituation()
 
-Print the current velocity, runtime, x and y coordinate. 
+Print the current velocity, runtime, x and y coordinate.
 
 9. getSituationWithX(target_x)
 
